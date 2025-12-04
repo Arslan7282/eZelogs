@@ -94,11 +94,11 @@ def test_004_fill_form(driver):
 
     wait.until(EC.presence_of_element_located(
         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your Password']")
-    )).send_keys("123456789")
+    )).send_keys("Test@1234")
 
     wait.until(EC.presence_of_element_located(
         (AppiumBy.XPATH, "//android.widget.EditText[@text='Confirm Password']")
-    )).send_keys("123456789")
+    )).send_keys("Test@1234")
 
 
 # ---------------------------
