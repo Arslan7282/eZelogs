@@ -4,6 +4,7 @@ from appium.options.common import AppiumOptions
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Auth_Helpers import AuthHelpers
 
 
 @pytest.fixture(scope="session")
@@ -73,6 +74,9 @@ def test_003_fill_invalid_data(driver):
         find(driver, "//android.widget.EditText[@text='your phone number']").send_keys("03366@")
         find(driver, "//android.widget.EditText[@text='Your Password']").send_keys("Nnexone@1122")
         find(driver, "//android.widget.EditText[@text='Confirm Password']").send_keys("Nnexone1122")
+        btn = find(driver, "//android.widget.TextView[@text='Register']")
+        btn.click()
+        AuthHelpers.check_error_message(driver, "required", timeout=3)
     except:
         return False, "Failed to fill invalid data"
 
