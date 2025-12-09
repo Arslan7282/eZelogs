@@ -4,17 +4,42 @@ from appium.webdriver.common.appiumby import AppiumBy
 class AuthHelpers:
 
     @staticmethod
-    def check_error_message(driver, expected_texts, timeout=5):
+    def get_error_messages(driver, timeout=5):
+        """Find visible error messages and return them as a list."""
+        time.sleep(timeout)
 
-        for text in expected_texts:
-            error_selectors = [
-                (AppiumBy.XPATH, f"//*[contains(@text, '{text}')]"),
-                (AppiumBy.XPATH,
-                 f"//*[contains(translate(@text, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{text.lower()}')]"),
-            ]
+        # Common selectors for error text
+        selectors = [
+            (AppiumBy.XPATH, "//*[contains(@text,'error')]"),
+            (AppiumBy.XPATH, "//android.widget.TextView"),
+        ]
 
-            # if ElementHelpers.element_exists(driver, error_selectors, timeout=timeout):
-            #     return True
+        found_messages = []
 
-        return False
+        for by, value in selectors:
+            try:
+                elements = driver.find_elements(by, value)
+                for el in elements:
+                    text = el.text.strip()
+                    if text and len(text) < 150:  # filter layout junk
+                        if any(word in text.lower() for word in ["error", "invalid", "required"]):
+                            found_messages.append(text)
+            except:
+                pass
 
+        return found_messages
+
+    @staticmethod
+    def assert_error_message(driver):
+        """Print errors + fail test if no error is found."""
+        errors = AuthHelpers.get_error_messages(driver)
+
+        print("\n--- ERROR MESSAGES FOUND ---")
+        if errors:
+            for e in errors:
+                print(f"❌ {e}")
+            print("------------------------------\n")
+            return errors
+
+        print("❌ No error message shown!")
+        raise AssertionError("No error message was displayed!")

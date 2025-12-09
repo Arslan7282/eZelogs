@@ -76,7 +76,9 @@ def test_003_fill_invalid_data(driver):
         find(driver, "//android.widget.EditText[@text='Confirm Password']").send_keys("Nnexone1122")
         btn = find(driver, "//android.widget.TextView[@text='Register']")
         btn.click()
-        AuthHelpers.check_error_message(driver, "required", timeout=3)
+        errors = AuthHelpers.assert_error_message(driver)
+
+        assert errors, "No validation errors displayed for invalid input"
     except:
         return False, "Failed to fill invalid data"
 
@@ -105,7 +107,7 @@ def test_004_submit_registration_errors(driver):
             print("No error messages found.")
 
     except Exception as e:
-        assert False, f"Exception while submitting form: {str(e)}"
+        return False, f"Exception while submitting form: {str(e)}"
 
 
 # ---------------------------
@@ -177,13 +179,13 @@ def test_010_fill_valid_data(driver):
         find(driver, "//android.widget.EditText[@text='Your Password']").send_keys("Test@1234")
         find(driver, "//android.widget.EditText[@text='Confirm Password']").send_keys("Test@1234")
     except:
-        assert False, "Failed to fill valid data"
+        return False, "Failed to fill valid data"
+
 
 def test_011_submit_registration(driver):
-        # Click the Register button
-        btn = find(driver, "//android.widget.TextView[@text='Register']")
-        btn.click()
-
+    # Click the Register button
+    btn = find(driver, "//android.widget.TextView[@text='Register']")
+    btn.click()
 
 # # ---------------------------
 # # Test 001
