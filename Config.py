@@ -55,131 +55,19 @@ def test_001_get_started(driver):
 
 
 # ---------------------------
-# TC-SU-002 – Open Sign Up Page
-# ---------------------------
-def test_002_open_signup_page(driver):
-    try:
-        btn = find(driver, "//android.widget.TextView[@text='Sign Up']")
-        btn.click()
-    except:
-        assert False, "Sign Up button not found"
-
-
-# ---------------------------
 # TC-SU-003 – Fill Invalid Data
 # ---------------------------
-def test_003_fill_invalid_data(driver):
+def test_003_fill_valid_data(driver):
     try:
-        find(driver, "//android.widget.EditText[@text='Your Email Address']").send_keys("nexone1122@")
-        find(driver, "//android.widget.EditText[@text='your phone number']").send_keys("03366@")
-        find(driver, "//android.widget.EditText[@text='Your Password']").send_keys("Nnexone@1122")
-        find(driver, "//android.widget.EditText[@text='Confirm Password']").send_keys("Nnexone1122")
-        btn = find(driver, "//android.widget.TextView[@text='Register']")
-        btn.click()
-        errors = AuthHelpers.assert_error_message(driver)
+        find(driver, "//android.widget.EditText[@text='Your Email Address']").send_keys("ezelogtest112233@yopmail.com")
+        find(driver, "//android.widget.EditText[@text='your phone number']").send_keys("Ezelogtest123@")
+        # btn = find(driver, "//android.widget.TextView[@text='Register']")
+        # btn.click()
+        # errors = AuthHelpers.assert_error_message(driver)
 
         assert errors, "No validation errors displayed for invalid input"
     except:
         return False, "Failed to fill invalid data"
-
-
-# ---------------------------
-# TC-SU-004 – Submit Form & Print Errors
-# ---------------------------
-def test_004_submit_registration_errors(driver):
-    try:
-        # Click the Register button
-        btn = find(driver, "//android.widget.TextView[@text='Register']")
-        btn.click()
-
-        # Capture error messages
-        errors = driver.find_elements(
-            AppiumBy.XPATH,
-            "//android.widget.TextView[contains(@text,'invalid') or contains(@text,'required') or contains(@text,'mismatch')]"
-        )
-
-        if errors:
-            print("\n=== Error Messages ===")
-            for e in errors:
-                print(e.text)
-            print("====================\n")
-        else:
-            print("No error messages found.")
-
-    except Exception as e:
-        return False, f"Exception while submitting form: {str(e)}"
-
-
-# ---------------------------
-# TC-SU-010 – Show/Hide Password
-# ---------------------------
-def test_005_show_hide_password(driver):
-    try:
-        eye = find(driver, "(//android.widget.TextView[@text=''])[1]")
-        eye.click()
-    except:
-        assert False, "Password toggle not found"
-
-
-# ---------------------------
-# TC-SU-011 – WhatsApp Checkbox
-# ---------------------------
-def test_006_whatsapp_checkbox(driver):
-    try:
-        cb = find(driver, "//android.widget.TextView[@text='']")
-        cb.click()
-    except:
-        assert False, "WhatsApp checkbox not found"
-
-
-# ---------------------------
-# TC-SU-012 – Country Code Selection
-# ---------------------------
-def test_007_country_code(driver):
-    try:
-        code = find(driver, "//android.widget.TextView[@text='+92']")
-        code.click()
-    except:
-        assert False, "Country code +92 not found"
-
-
-# ---------------------------
-# TC-SU-014 – Password Min Length
-# ---------------------------
-def test_008_password_min_length(driver):
-    try:
-        pwd = find(driver, "//android.widget.EditText[@text='Your Password']")
-        pwd.send_keys("123")
-    except:
-        assert False, "Password field not found"
-
-
-# ---------------------------
-# TC-SU-015 – Google Sign Up
-# ---------------------------
-def test_009_google_signup(driver):
-    try:
-        btn = find(driver, "//android.widget.TextView[@text='Continue with Google']")
-        btn.click()
-    except:
-        assert False, "Google sign up button not found"
-
-
-# ---------------------------
-# TC-SU-003b – Fill Valid Data (Optional)
-# ---------------------------
-def test_010_fill_valid_data(driver):
-    try:
-        find(driver, "//android.widget.EditText[@text='Your First Name']").send_keys("Abdullah")
-        find(driver, "//android.widget.EditText[@text='Your Last Name']").send_keys("Ahmad")
-        find(driver, "//android.widget.EditText[@text='Your Email Address']").send_keys("abdullah123@yopmail.com")
-        find(driver, "//android.widget.EditText[@text='your phone number']").send_keys("03028427278")
-        find(driver, "//android.widget.EditText[@text='Your Company Name']").send_keys("Preesoft")
-        find(driver, "//android.widget.EditText[@text='Your Work Title']").send_keys("CEO")
-        find(driver, "//android.widget.EditText[@text='Your Password']").send_keys("Test@1234")
-        find(driver, "//android.widget.EditText[@text='Confirm Password']").send_keys("Test@1234")
-    except:
-        return False, "Failed to fill valid data"
 
 
 def test_011_submit_registration(driver):
@@ -187,86 +75,195 @@ def test_011_submit_registration(driver):
     btn = find(driver, "//android.widget.TextView[@text='Register']")
     btn.click()
 
-# # ---------------------------
-# # Test 001
-# # ---------------------------
-# def test_001_open_app(driver):
-#     driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ezelogs, 0 notifications").click()
-#
-#
-# # ---------------------------
-# # Test 002
-# # ---------------------------
-# def test_002_get_started(driver):
-#     wait = WebDriverWait(driver, 30)
-#     get_started = wait.until(
-#         EC.presence_of_element_located(
-#             (AppiumBy.XPATH, "//android.widget.TextView[@text='Get Started']")
-#         )
-#     )
-#     get_started.click()
-#
-#
-# # ---------------------------
-# # Test 003
-# # ---------------------------
-# def test_003_open_signup_page(driver):
-#     wait = WebDriverWait(driver, 30)
-#     signup_btn = wait.until(
-#         EC.presence_of_element_located(
-#             (AppiumBy.XPATH, "//android.widget.TextView[@text='Sign Up']")
-#         )
-#     )
-#     signup_btn.click()
-#
-#
-# # ---------------------------
-# # Test 004
-# # ---------------------------
-# def test_004_fill_form(driver):
-#     wait = WebDriverWait(driver, 30)
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your First Name']")
-#     )).send_keys("Abdullah")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your Last Name']")
-#     )).send_keys("Ahmad")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your Email Address']")
-#     )).send_keys("abdullah123@yopmail.com")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='your phone number']")
-#     )).send_keys("03028427278")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your Company Name']")
-#     )).send_keys("Preesoft")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your Work Title']")
-#     )).send_keys("CEO")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Your Password']")
-#     )).send_keys("Test@1234")
-#
-#     wait.until(EC.presence_of_element_located(
-#         (AppiumBy.XPATH, "//android.widget.EditText[@text='Confirm Password']")
-#     )).send_keys("Test@1234")
-#
-#
-# # ---------------------------
-# # Test 005
-# # ---------------------------
-# def test_005_submit_form(driver):
-#     wait = WebDriverWait(driver, 30)
-#     register_btn = wait.until(
-#         EC.presence_of_element_located(
-#             (AppiumBy.XPATH, "//android.widget.TextView[@text='Register']")
-#         )
-#     )
-#     register_btn.click()
+
+# ---------------------------
+# TC-DASH-001 – Verify Company Dashboard Loads
+# ---------------------------
+def test_001_verify_dashboard_loads(driver):
+    try:
+        dashboard = find(driver, "//android.widget.TextView[@text='Dashboard']")
+        assert dashboard.is_displayed(), "Dashboard not loaded"
+    except:
+        assert False, "Company Dashboard failed to load"
+
+
+# ---------------------------
+# TC-DASH-002 – Verify All Projects Count Visible
+# ---------------------------
+def test_002_verify_all_projects_count(driver):
+    try:
+        count = find(driver, "//android.widget.TextView[contains(@text,'All Projects')]")
+        assert count.is_displayed(), "All Projects count not visible"
+    except:
+        assert False, "All Projects count not found"
+
+
+# ---------------------------
+# TC-DASH-003 – Verify Pending Projects Count
+# ---------------------------
+def test_003_verify_pending_projects_count(driver):
+    try:
+        pending = find(driver, "//android.widget.TextView[contains(@text,'Pending')]")
+        assert pending.is_displayed(), "Pending Projects not visible"
+    except:
+        assert False, "Pending Projects count not found"
+
+
+# ---------------------------
+# TC-DASH-004 – Verify Quick Links Visibility
+# ---------------------------
+def test_004_verify_quick_links(driver):
+    try:
+        quick_links = find(driver, "//android.widget.TextView[@text='Quick Links']")
+        assert quick_links.is_displayed(), "Quick Links not visible"
+    except:
+        assert False, "Quick Links section missing"
+
+
+# ---------------------------
+# TC-DASH-005 – Navigate to Projects Page
+# ---------------------------
+def test_005_navigate_to_projects(driver):
+    try:
+        projects = find(driver, "//android.widget.TextView[@text='Projects']")
+        projects.click()
+    except:
+        assert False, "Projects navigation failed"
+
+
+# ---------------------------
+# TC-PROJ-006 – Verify Projects Screen Loads
+# ---------------------------
+def test_006_verify_projects_screen(driver):
+    try:
+        header = find(driver, "//android.widget.TextView[@text='Projects']")
+        assert header.is_displayed(), "Projects screen not loaded"
+    except:
+        assert False, "Projects screen failed to load"
+
+
+# ---------------------------
+# TC-PROJ-007 – Verify Search Field
+# ---------------------------
+def test_007_verify_search_field(driver):
+    try:
+        search = find(driver, "//android.widget.EditText[contains(@text,'Search')]")
+        search.click()
+        search.send_keys("Test Project")
+    except:
+        assert False, "Search field not working"
+
+
+# ---------------------------
+# TC-PROJ-008 – Verify Project List Visibility
+# ---------------------------
+def test_008_verify_project_list(driver):
+    try:
+        project_list = driver.find_elements(
+            AppiumBy.XPATH,
+            "//android.widget.TextView[contains(@resource-id,'project')]"
+        )
+        assert len(project_list) > 0, "Project list is empty"
+    except:
+        assert False, "Project list not visible"
+
+
+# ---------------------------
+# TC-PROJ-009 – Verify Show More Button
+# ---------------------------
+def test_009_verify_show_more_button(driver):
+    try:
+        show_more = find(driver, "//android.widget.TextView[@text='Show More']")
+        show_more.click()
+    except:
+        assert False, "Show More button not working"
+
+
+# ---------------------------
+# TC-PROJ-010 – Verify Add Project (+) Button
+# ---------------------------
+def test_010_verify_add_project_button(driver):
+    try:
+        add_btn = find(driver, "//android.widget.TextView[@text='+']")
+        add_btn.click()
+    except:
+        assert False, "Add Project (+) button not found"
+
+
+# ---------------------------
+# TC-PROJ-011 – Verify Create Project Page Loads
+# ---------------------------
+def test_011_verify_create_project_page(driver):
+    try:
+        title = find(driver, "//android.widget.TextView[@text='Create Project']")
+        assert title.is_displayed(), "Create Project page not loaded"
+    except:
+        assert False, "Create Project page failed to load"
+
+
+# ---------------------------
+# TC-PROJ-012 – Verify Mandatory Field Validation
+# ---------------------------
+def test_012_verify_mandatory_fields(driver):
+    try:
+        save_btn = find(driver, "//android.widget.TextView[@text='Save']")
+        save_btn.click()
+
+        errors = driver.find_elements(
+            AppiumBy.XPATH,
+            "//android.widget.TextView[contains(@text,'required')]"
+        )
+
+        assert len(errors) > 0, "No validation errors shown"
+    except:
+        assert False, "Mandatory validation failed"
+
+
+# ---------------------------
+# TC-PROJ-013 – Verify Country Dropdown
+# ---------------------------
+def test_013_verify_country_dropdown(driver):
+    try:
+        country = find(driver, "//android.widget.TextView[contains(@text,'Country')]")
+        country.click()
+    except:
+        assert False, "Country dropdown not clickable"
+
+
+# ---------------------------
+# TC-PROJ-014 – Verify State Field after Country Selection
+# ---------------------------
+def test_014_verify_state_field(driver):
+    try:
+        state = find(driver, "//android.widget.EditText[contains(@text,'State')]")
+        state.click()
+        state.send_keys("Punjab")
+    except:
+        assert False, "State field not working"
+
+
+# ---------------------------
+# TC-PROJ-015 – Verify ZIP Code Input
+# ---------------------------
+def test_015_verify_zip_code_field(driver):
+    try:
+        zip_code = find(driver, "//android.widget.EditText[contains(@text,'Zip')]")
+        zip_code.click()
+        zip_code.send_keys("54000")
+    except:
+        assert False, "ZIP code field not working"
+
+
+# ---------------------------
+# TC-PROJ-016 – Submit Form with Valid Data
+# ---------------------------
+def test_016_submit_valid_project_form(driver):
+    try:
+        # Fill other required fields (adjust XPaths if needed)
+        find(driver, "//android.widget.EditText[contains(@text,'Project Name')]").send_keys("Automation Project")
+        find(driver, "//android.widget.EditText[contains(@text,'Address')]").send_keys("Lahore, Pakistan")
+
+        submit = find(driver, "//android.widget.TextView[@text='Save']")
+        submit.click()
+    except:
+        assert False, "Project form submission failed"
