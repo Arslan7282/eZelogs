@@ -39,14 +39,14 @@ def find(driver, xpath, timeout=20):
 # ---------------------------
 # Test 001 – Open App
 # ---------------------------
-def test_000_open_app(driver):
+def test_001_open_app(driver):
     driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ezelogs, 0 notifications").click()
 
 
 # ---------------------------
 # TC-SU-001 – Get Started Opens Next Screen
 # ---------------------------
-def test_001_get_started(driver):
+def test_002_get_started(driver):
     try:
         btn = find(driver, "//android.widget.TextView[@text='Get Started']")
         btn.click()
@@ -60,7 +60,7 @@ def test_001_get_started(driver):
 def test_003_fill_valid_data(driver):
     try:
         find(driver, "//android.widget.EditText[@text='Your Email Address']").send_keys("ezelogtest112233@yopmail.com")
-        find(driver, "//android.widget.EditText[@text='your phone number']").send_keys("Ezelogtest123@")
+        find(driver, "//android.widget.EditText[@text='Your Password']").send_keys("Ezelogtest123@")
         # btn = find(driver, "//android.widget.TextView[@text='Register']")
         # btn.click()
         # errors = AuthHelpers.assert_error_message(driver)
@@ -70,27 +70,37 @@ def test_003_fill_valid_data(driver):
         return False, "Failed to fill invalid data"
 
 
-def test_011_submit_registration(driver):
+def test_004_submit_registration(driver):
     # Click the Register button
-    btn = find(driver, "//android.widget.TextView[@text='Register']")
+    btn = find(driver, "(//android.widget.TextView[@text='Login'])[2]")
     btn.click()
 
 
 # ---------------------------
 # TC-DASH-001 – Verify Company Dashboard Loads
 # ---------------------------
-def test_001_verify_dashboard_loads(driver):
+def test_005_verify_dashboard_loads(driver):
     try:
-        dashboard = find(driver, "//android.widget.TextView[@text='Dashboard']")
+        dashboard = find(driver, "//android.widget.TextView[@text='Suffa Tech IT Solution Company']")
         assert dashboard.is_displayed(), "Dashboard not loaded"
     except:
         assert False, "Company Dashboard failed to load"
+
+# ---------------------------
+# TC-DASH-005 – Navigate to Projects Page
+# ---------------------------
+def test_006_navigate_to_projects(driver):
+    try:
+        projects = find(driver, "//android.widget.TextView[@text='Projects']")
+        projects.click()
+    except:
+        assert False, "Projects navigation failed"
 
 
 # ---------------------------
 # TC-DASH-002 – Verify All Projects Count Visible
 # ---------------------------
-def test_002_verify_all_projects_count(driver):
+def test_007_verify_all_projects_count(driver):
     try:
         count = find(driver, "//android.widget.TextView[contains(@text,'All Projects')]")
         assert count.is_displayed(), "All Projects count not visible"
@@ -101,7 +111,7 @@ def test_002_verify_all_projects_count(driver):
 # ---------------------------
 # TC-DASH-003 – Verify Pending Projects Count
 # ---------------------------
-def test_003_verify_pending_projects_count(driver):
+def test_007_verify_pending_projects_count(driver):
     try:
         pending = find(driver, "//android.widget.TextView[contains(@text,'Pending')]")
         assert pending.is_displayed(), "Pending Projects not visible"
@@ -112,7 +122,7 @@ def test_003_verify_pending_projects_count(driver):
 # ---------------------------
 # TC-DASH-004 – Verify Quick Links Visibility
 # ---------------------------
-def test_004_verify_quick_links(driver):
+def test_008_verify_quick_links(driver):
     try:
         quick_links = find(driver, "//android.widget.TextView[@text='Quick Links']")
         assert quick_links.is_displayed(), "Quick Links not visible"
@@ -121,20 +131,9 @@ def test_004_verify_quick_links(driver):
 
 
 # ---------------------------
-# TC-DASH-005 – Navigate to Projects Page
-# ---------------------------
-def test_005_navigate_to_projects(driver):
-    try:
-        projects = find(driver, "//android.widget.TextView[@text='Projects']")
-        projects.click()
-    except:
-        assert False, "Projects navigation failed"
-
-
-# ---------------------------
 # TC-PROJ-006 – Verify Projects Screen Loads
 # ---------------------------
-def test_006_verify_projects_screen(driver):
+def test_010_verify_projects_screen(driver):
     try:
         header = find(driver, "//android.widget.TextView[@text='Projects']")
         assert header.is_displayed(), "Projects screen not loaded"
@@ -145,11 +144,11 @@ def test_006_verify_projects_screen(driver):
 # ---------------------------
 # TC-PROJ-007 – Verify Search Field
 # ---------------------------
-def test_007_verify_search_field(driver):
+def test_011_verify_search_field(driver):
     try:
-        search = find(driver, "//android.widget.EditText[contains(@text,'Search')]")
+        search = find(driver, "//android.widget.EditText[contains(@text,'Search...')]")
         search.click()
-        search.send_keys("Test Project")
+        search.send_keys("Vhgh")
     except:
         assert False, "Search field not working"
 
@@ -157,7 +156,7 @@ def test_007_verify_search_field(driver):
 # ---------------------------
 # TC-PROJ-008 – Verify Project List Visibility
 # ---------------------------
-def test_008_verify_project_list(driver):
+def test_012_verify_project_list(driver):
     try:
         project_list = driver.find_elements(
             AppiumBy.XPATH,
@@ -171,7 +170,7 @@ def test_008_verify_project_list(driver):
 # ---------------------------
 # TC-PROJ-009 – Verify Show More Button
 # ---------------------------
-def test_009_verify_show_more_button(driver):
+def test_013_verify_show_more_button(driver):
     try:
         show_more = find(driver, "//android.widget.TextView[@text='Show More']")
         show_more.click()
@@ -182,9 +181,9 @@ def test_009_verify_show_more_button(driver):
 # ---------------------------
 # TC-PROJ-010 – Verify Add Project (+) Button
 # ---------------------------
-def test_010_verify_add_project_button(driver):
+def test_014_verify_add_project_button(driver):
     try:
-        add_btn = find(driver, "//android.widget.TextView[@text='+']")
+        add_btn = find(driver, "//android.widget.TextView[@text='']")
         add_btn.click()
     except:
         assert False, "Add Project (+) button not found"
@@ -193,7 +192,7 @@ def test_010_verify_add_project_button(driver):
 # ---------------------------
 # TC-PROJ-011 – Verify Create Project Page Loads
 # ---------------------------
-def test_011_verify_create_project_page(driver):
+def test_015_verify_create_project_page(driver):
     try:
         title = find(driver, "//android.widget.TextView[@text='Create Project']")
         assert title.is_displayed(), "Create Project page not loaded"
@@ -204,9 +203,9 @@ def test_011_verify_create_project_page(driver):
 # ---------------------------
 # TC-PROJ-012 – Verify Mandatory Field Validation
 # ---------------------------
-def test_012_verify_mandatory_fields(driver):
+def test_016_verify_mandatory_fields(driver):
     try:
-        save_btn = find(driver, "//android.widget.TextView[@text='Save']")
+        save_btn = find(driver, "//android.widget.TextView[@text='Submit']")
         save_btn.click()
 
         errors = driver.find_elements(
@@ -218,13 +217,24 @@ def test_012_verify_mandatory_fields(driver):
     except:
         assert False, "Mandatory validation failed"
 
+# ---------------------------
+# TC-PROJ-015 – Verify ZIP Code Input
+# ---------------------------
+def test_019_verify_zip_code_field(driver):
+    try:
+        zip_code = find(driver, "//android.widget.EditText[contains(@text,'Zip Code*')]")
+        zip_code.click()
+        zip_code.send_keys("54000")
+    except:
+        assert False, "ZIP code field not working"
+
 
 # ---------------------------
 # TC-PROJ-013 – Verify Country Dropdown
 # ---------------------------
-def test_013_verify_country_dropdown(driver):
+def test_017_verify_country_dropdown(driver):
     try:
-        country = find(driver, "//android.widget.TextView[contains(@text,'Country')]")
+        country = find(driver, "//android.widget.TextView[contains(@text,'Select Country')]")
         country.click()
     except:
         assert False, "Country dropdown not clickable"
@@ -233,9 +243,9 @@ def test_013_verify_country_dropdown(driver):
 # ---------------------------
 # TC-PROJ-014 – Verify State Field after Country Selection
 # ---------------------------
-def test_014_verify_state_field(driver):
+def test_018_verify_state_field(driver):
     try:
-        state = find(driver, "//android.widget.EditText[contains(@text,'State')]")
+        state = find(driver, "//android.widget.EditText[contains(@text,'Select country first')]")
         state.click()
         state.send_keys("Punjab")
     except:
@@ -243,27 +253,15 @@ def test_014_verify_state_field(driver):
 
 
 # ---------------------------
-# TC-PROJ-015 – Verify ZIP Code Input
-# ---------------------------
-def test_015_verify_zip_code_field(driver):
-    try:
-        zip_code = find(driver, "//android.widget.EditText[contains(@text,'Zip')]")
-        zip_code.click()
-        zip_code.send_keys("54000")
-    except:
-        assert False, "ZIP code field not working"
-
-
-# ---------------------------
 # TC-PROJ-016 – Submit Form with Valid Data
 # ---------------------------
-def test_016_submit_valid_project_form(driver):
+def test_020_submit_valid_project_form(driver):
     try:
         # Fill other required fields (adjust XPaths if needed)
         find(driver, "//android.widget.EditText[contains(@text,'Project Name')]").send_keys("Automation Project")
         find(driver, "//android.widget.EditText[contains(@text,'Address')]").send_keys("Lahore, Pakistan")
 
-        submit = find(driver, "//android.widget.TextView[@text='Save']")
+        submit = find(driver, "//android.widget.TextView[@text='Submit']")
         submit.click()
     except:
         assert False, "Project form submission failed"
