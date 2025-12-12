@@ -248,118 +248,108 @@ def test_open_settings(driver):
     settings_icon.click()
     return find(driver, (AppiumBy.XPATH, "//android.widget.TextView[@text='Settings']"))
 
+
     # -------------------------
     # TC_SET_01 Verify Settings popup is displayed
     # -------------------------
-
 def test_settings_popup_display(driver):
     popup = open_settings(driver)
     assert popup.is_displayed()
 
+
     # -------------------------
     # TC_SET_02 Verify Select All
     # -------------------------
-
-
 def test_select_all(driver):
     open_settings(driver)
     select_all = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='select_all']"))
     select_all.click()
     assert select_all.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_03 Verify Counter checkbox
     # -------------------------
-
-
 def test_counter_toggle(driver):
     open_settings(driver)
     counter = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='counter']"))
     counter.click()
     assert counter.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_04 Verify Quick Links toggle
     # -------------------------
-
-
 def test_quick_links_toggle(driver):
     open_settings(driver)
     qlinks = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='quick_links']"))
     qlinks.click()
     assert qlinks.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_05 Verify Vendor checkbox
     # -------------------------
-
-
 def test_vendor_checkbox(driver):
     open_settings(driver)
     vendor = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='vendor']"))
     vendor.click()
     assert vendor.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_06 Verify Gallery checkbox
     # -------------------------
-
-
 def test_gallery_checkbox(driver):
     open_settings(driver)
     gallery = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='gallery']"))
     gallery.click()
     assert gallery.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_07 Verify Employees checkbox
     # -------------------------
-
-
 def test_employees_checkbox(driver):
     open_settings(driver)
     employees = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='employees']"))
     employees.click()
     assert employees.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_08 Verify Customers checkbox
     # -------------------------
-
-
 def test_customers_checkbox(driver):
     open_settings(driver)
     customers = find(driver, (AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='customers']"))
     customers.click()
     assert customers.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_09 Verify Recent Activities checkbox
     # -------------------------
-
-
 def test_recent_activities_checkbox(driver):
     open_settings(driver)
     recent_act = find(driver,(AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='recent_activities']"))
     recent_act.click()
     assert recent_act.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_10 Verify Recent Projects checkbox
     # -------------------------
-
-
 def test_recent_projects_checkbox(driver):
     open_settings(driver)
     recent_proj = find(driver,(AppiumBy.XPATH, "//android.widget.CheckBox[@content-desc='recent_projects']"))
     recent_proj.click()
     assert recent_proj.get_attribute("checked") == "true"
 
+
     # -------------------------
     # TC_SET_11 Verify Cancel button
     # -------------------------
-
-
 def test_cancel_button(driver):
     open_settings(driver)
     cancel_btn = find(driver, (AppiumBy.XPATH, "//android.widget.Button[@text='Cancel']"))
@@ -368,11 +358,10 @@ def test_cancel_button(driver):
     dashboard = find(driver, (AppiumBy.XPATH, "//android.widget.TextView[@text='Dashboard']"))
     assert dashboard.is_displayed()
 
+
     # -------------------------
     # TC_SET_12 Verify Save button
     # -------------------------
-
-
 def test_save_button(driver):
     open_settings(driver)
 
